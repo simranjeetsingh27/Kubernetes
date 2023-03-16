@@ -18,7 +18,7 @@ etcdctl endpoint health
 etcdctl get
 etcdctl put
 
-To set the right version of API set the environment variable ETCDCTL_API command
+To set the right version of API set the environment variable ETCDCTL_API command.
 
 export ETCDCTL_API=3
 
