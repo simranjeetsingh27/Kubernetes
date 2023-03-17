@@ -34,8 +34,7 @@ Apart from that, you must also specify path to certificate files so that ETCDCTL
 --cert /etc/kubernetes/pki/etcd/server.crt     
 --key /etc/kubernetes/pki/etcd/server.key
 
-
-So for the commands I showed in the previous video to work you must specify the ETCDCTL API version and path to certificate files. Below is the final form:
+To work you must specify the ETCDCTL API version and path to certificate files. Below is the final form:
 
 
 
