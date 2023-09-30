@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helpapi-test
+  namespace: sit
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-helpapi-test
+  template:
+    metadata:
+      name: helpapi-test
+      labels:
+        app: api-helpapi-test
+ # volumes:
+ #- name: mobilevan-pvc
+ #  persistentVolumeClaim:
+ #    claimName: mobilevan-pvc
+    spec:
+      containers:
+      - name: apiimage
+        image: d01.plcal:8443/sit/help
+        ports:
+        - containerPort: port_number
+        volumeMounts:
+        - name: modpdocs
+          mountPath: /modpdocs
+        - name: modpdocs
+          mountPath: /modpcas
+          subpath: xyz
+      volumeMounts:
+      - mountPath: /applogs/
+        name: applogs
+      volumes:
+      - name: applogs
+        hostPath:
+          path: /applogs/
+      volumes:
+      - name: modpdocs
+        persistentVolumeClaim:
+          claimName: sit-p
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helpapi-test
+  namespace: sit
+spec:
+  selector:
+    app: api-helpapi-test
+  ports:
+  - port: 80
+    targetPort: port_number
+    protocol: TCP
